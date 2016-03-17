@@ -12,7 +12,7 @@ import java.nio.file.StandardCopyOption;
 
 import javax.swing.JOptionPane;
 
-public class Button implements ActionListener {
+public class InstallButton implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
