@@ -32,6 +32,7 @@ public class Main {
 	static JTextField input;
 	static JCheckBox villagesBox;
 	static JCheckBox slabsBox;
+	static JCheckBox villagesChatBox;
 	static JFrame window;
 	static boolean clicked;
 	public static void main(String[] args) {
@@ -52,15 +53,18 @@ public class Main {
 		JPanel content3 = new JPanel();
 		content3.setLayout(new BorderLayout());
 		content1.setLayout(new BorderLayout());
-		content2.setLayout(new GridLayout(0,2));
+		content2.setLayout(new GridLayout(0,3));
 		content3.add(input, BorderLayout.SOUTH);
 		content3.add(new Dissplay(), BorderLayout.CENTER);
-		villagesBox = new JCheckBox("Villages");
 		content1.add(content3, BorderLayout.NORTH);
+		villagesBox = new JCheckBox("Villages");
 		villagesBox.setSelected(false);
 		slabsBox = new JCheckBox("Slabs");
 		slabsBox.setSelected(false);
+		villagesChatBox = new JCheckBox("Village Chat");
+		villagesChatBox.setSelected(false);
 		content2.add(villagesBox);
+		content2.add(villagesChatBox);
 		content2.add(slabsBox);
 		JButton button = new JButton("Go");
 		ActionListener buttonLisener = new InstallButton();
@@ -82,6 +86,9 @@ public class Main {
 	}
 	public boolean getSlabs(){
 		return slabsBox.isSelected();
+	}
+	public boolean getChat(){
+		return villagesChatBox.isSelected();
 	}
 	public JTextField getTextFeild(){
 		return input;

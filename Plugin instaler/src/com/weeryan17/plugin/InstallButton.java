@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -16,12 +17,14 @@ public class InstallButton implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		ArrayList<String> installedList = new ArrayList<String>();
+		String message;
 		Main main = new Main();
 		Main.window.setVisible(false);
 		String text = main.getText();
 		String text2 = text.replaceAll("\\\\", "/");
 		if(main.getVillages()){
-			
+			installedList.add("villages");
 			try {
 				URL villages = new URL("https://www.dropbox.com/s/g35ogdp93v95ilp/Villages.jar?dl=1");
 				InputStream in = villages.openStream();
@@ -32,7 +35,11 @@ public class InstallButton implements ActionListener {
 				e1.printStackTrace();
 			}
 		}
+		if(main.getChat()){
+			
+		}
 		if(main.getSlabs()){
+			installedList.add("slabs");
 			try {
 				URL slabs = new URL("https://www.dropbox.com/s/gwflh7tly744ze1/Slabs.txt?dl=1");
 				InputStream in = slabs.openStream();
@@ -43,19 +50,18 @@ public class InstallButton implements ActionListener {
 				e1.printStackTrace();
 			}
 		}
-		if(main.getVillages() && main.getSlabs()){
-			JOptionPane.showMessageDialog(null, "You installed villages and slabs!");
-			System.exit(0);
-		} else if(main.getVillages()){
-			JOptionPane.showMessageDialog(null, "You installed villages!");
-			System.exit(0);
-		} else if(main.getSlabs()){
-			JOptionPane.showMessageDialog(null, "You installed slabs!");
-			System.exit(0);
+		message = "You instaled ";
+		if(installedList.isEmpty()){
+			message = message + "nothing. :(";
 		} else {
-			JOptionPane.showMessageDialog(null, "You didn't install anything. :(");
-			System.exit(0);
+			int size = installedList.size();
+			if(size == 1){
+				message = message + installedList.get(0) + ".";
+			} else if(size == 2){
+				message = message + installedList.get(0) + ", and " + installedList.get(1) + ".";
+			}
 		}
-		
+		JOptionPane.showMessageDialog(null, message);
+		System.exit(0);
 	}
 }
